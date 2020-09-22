@@ -7,3 +7,6 @@ class Person {
         return `Hello ${yourName}, my name is ${this.name}`;
       }
 }
+
+
+console.log(new Person('Kate'))

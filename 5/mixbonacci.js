@@ -73,6 +73,32 @@ function* cycle(iterable) {
     }
 }
 
+
+function mixbonacci(patterns, length){
+
+    let mix = [];
+    if(!patterns.length || !length){return mix;}
+    
+    let cursor = 0, map = {'fib':[0,1], 'pad':[1,0,0], 'jac':[0,1], 'pel':[0,1], 'tri':[0,0,1], 'tet':[0,0,0,1]};
+    for(let i=0; i<length; i++){
+      let pattern = patterns[cursor], ones = map[pattern];
+      switch(pattern){
+        case 'fib':
+        case 'pad': map[pattern].push(ones[0] + ones[1]); break;
+        case 'jac': map[pattern].push(2*ones[0] + ones[1]); break;
+        case 'pel': map[pattern].push(ones[0] + 2*ones[1]); break;
+        case 'tri': map[pattern].push(ones[0] + ones[1] + ones[2]); break;
+        case 'tet': map[pattern].push(ones[0] + ones[1] + ones[2] + ones[3]); break;
+      }
+      mix.push(map[pattern].splice(0,1)[0]);
+      cursor = cursor === patterns.length-1 ? 0 : ++cursor;
+    }
+    
+    return mix;
+    
+  }
+
+
 console.log(mixbonacci(['fib'], 0));
 console.log(mixbonacci(['fib'], 10));
 console.log(mixbonacci(['pad'], 10));
